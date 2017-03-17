@@ -9,6 +9,7 @@
 #include<set>
 #include<list>
 #include<vector>
+#include <ctime>
 #include<stack>
 #define gcd __gcd
 #define pb(x) push_back(x)
@@ -56,10 +57,7 @@ void solve(int src,int n)
 	cout<<"distances from "<<src<<"->";
 	for(int i=1;i<=n;i++)
 	{
-		if(dist[i]!=inf)
 			cout<<dist[i]<<" ";
-		else
-			cout<<"not_reachable ";
 	}
 	cout<<endl;
 	return;
@@ -67,23 +65,29 @@ void solve(int src,int n)
 int main()
 {
     ios::sync_with_stdio(0);
+    int start_s=clock();
+    //freopen("out.txt","r",stdin);
+    //freopen("in.txt","w",stdout);
     cout<<"enter the number of vertices\n";
   	int n;
   	cin>>n;
-  	int m;
-  	cout<<"enter the number of edges\n";
-  	cin>>m;
-  	int x,y,z;
-  	cout<<"enter the "<<m<<" edges and their weights respectively\n";
-  	for(int i=0;i<m;i++)
-  	{
-  		cin>>x>>y>>z;
-  		g.pb(m_p(x,y));
-  		weight[m_p(x,y)]=z;
-  	}
+  	cout<<"enter the adjacency matrix\n";
+  	int a;
+  	for(int i=1;i<=n;i++)
+  		for(int j=1;j<=n;j++)
+  		{
+  			cin>>a;
+  			if(a!=0)
+  			{
+  				g.pb(m_p(i,j));
+  				weight[m_p(i,j)]=a;
+  			}
+  		}
   	cout<<"by bellman-ford algorithm\n";
   	for(int i=1;i<=n;i++)
   		solve(i,n);
+  	int stop_s=clock();
+	cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << endl;
 
     return 0;
 }
